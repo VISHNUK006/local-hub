@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Contact Messages - Admin{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-success text-center">📬 Contact Messages</h2>
+
+    {% if contacts %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-dark table-striped">
+                <thead class="table-light text-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Received At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in contacts %}
+                        <tr>
+                            <td>{{ c.name }}</td>
+                            <td>{{ c.email }}</td>
+                            <td>{{ c.message }}</td>
+                            <td>{{ c.created_at.strftime("%Y-%m-%d %H:%M") }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">No contact messages found.</div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary btn-sm">← Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

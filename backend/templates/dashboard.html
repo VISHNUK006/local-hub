@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Local Hub{% endblock %}
+
+{% block content %}
+<div class="text-center mb-4">
+    <h2 class="text-success">⚙️ User Dashboard</h2>
+    <p class="lead">Welcome, <strong>{{ session['user']['name'] }}</strong></p>
+    <p>Role: <strong>{{ session['user']['role'] }}</strong></p>
+</div>
+        
+<hr>
+
+<div class="row justify-content-center">
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">📝 Your Profile</h5>
+                <p class="card-text">View and Edit your Profile</p>
+                <a href="{{ url_for('profile') }}" class="btn btn-outline-primary">Go to Profile</a>
+            </div>
+        </div>
+    </div>         
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">🔍 Browse Services</h5>
+                <p class="card-text">You can Browse all type of services</p>
+                <a href="/services" class="btn btn-outline-primary">Go to all Services</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">📅 My Bookings</h5>
+                <p class="card-text">View your Bookings</p>
+                <a href="/my-bookings" class="btn btn-outline-primary">Go to Bookings</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">👨‍🔧 View Service Providers</h5>
+                <p class="card-text">View all Providers</p>
+                <a href="/providers" class="btn btn-outline-primary">Go to Providers</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">🔔 View Notifications</h5>
+                <p class="card-text">View all Notifications</p>
+                <a href="{{ url_for('show_notifications') }}" class="btn btn-outline-primary">To view Notifications</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="{{ url_for('home') }}" class="btn btn-outline-danger">🏠 Home</a>
+</div>
+
+{% endblock %}

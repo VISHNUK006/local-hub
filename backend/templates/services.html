@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}All Services{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center mb-2 text-success">🔍 Available Local Services</h2>
+
+    {% if session.user %}
+        <p class="text-center">Showing services near: 
+            <strong>{{ session.user.location or "Not specified" }}</strong>
+        </p>
+    {% endif %}
+
+    <form class="row g-3 mb-4" method="GET" action="/services">
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="q" placeholder="Search title or description" value="{{ query or '' }}">
+        </div>
+        <div class="col-md-2">
+            <input type="number" class="form-control" name="min_price" placeholder="Min ₹" value="{{ min_price or '' }}">
+        </div>
+        <div class="col-md-2">
+            <input type="number" class="form-control" name="max_price" placeholder="Max ₹" value="{{ max_price or '' }}">
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-outline-success w-100">Search</button>
+        </div>
+        <div class="col-md-2">
+            <a href="/services" class="btn btn-outline-danger w-100">Reset</a>
+        </div>
+    </form>
+
+    {% if services %}
+        <div class="row">
+            {% for s in services %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card theme-card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">{{ s.title }}</h5>
+                            <p class="card-text"><strong>Description:</strong> {{ s.description }}</p>
+                            <p class="card-text"><strong>Price:</strong> ₹{{ s.price }}</p>
+                            <p class="card-text">
+                                <strong>Provider:</strong> {{ s.provider_name }} ({{ s.provider_email }})<br>
+                                <strong>Location:</strong> {{ s.provider_location or "N/A" }}
+                            </p>
+                            <p><small>Posted on {{ s.created_at.strftime('%Y-%m-%d %H:%M') }}</small></p>
+
+                            {% if session.get('user') and session['user']['role'] == 'user' %}
+                                <form action="{{ url_for('book_service', service_id=s.id) }}" method="POST" class="d-grid gap-2 mt-2">
+                                    <button type="submit" class="btn btn-primary">📦 Book Now</button>
+                                </form>
+                                <a href="{{ url_for('contact_provider', provider_id=s.provider_id) }}" class="btn btn-outline-secondary btn-sm mt-2 w-100">📩 Contact Provider</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center">No services available for your location yet.</div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="/dashboard" class="btn btn-outline-secondary btn-sm">← Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

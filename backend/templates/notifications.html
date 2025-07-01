@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Notifications{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4 text-success text-center">🔔 Your Notifications</h2>
+
+  {% if notifications %}
+    <ul class="list-group">
+      {% for note in notifications %}
+        <li class="list-group-item">
+          {{ note.message }}
+          <small class="text-muted d-block">🕒 {{ note.created_at }}</small>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="alert alert-info text-center">No notifications yet.</div>
+  {% endif %}
+
+   <div class="text-center mt-4">
+        <a href="/dashboard" class="btn btn-outline-secondary btn-sm">← Back to Dashboard</a>
+    </div>
+
+</div>
+{% endblock %}

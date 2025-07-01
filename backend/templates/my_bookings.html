@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}My Bookings - Local Services Hub{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center text-success mb-4">📋 My Booked Services</h2>
+
+    {% if bookings %}
+        <div class="row">
+            {% for b in bookings %}
+                <div class="col-md-6">
+                    <div class="card theme-card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">{{ b.title }}</h5>
+                            <p class="card-text"><strong>Description:</strong> {{ b.description }}</p>
+                            <p><strong>💰 Price:</strong> ₹{{ b.price }}</p>
+                            <p><strong>👨‍🔧 Provider:</strong> {{ b.provider_name }} ({{ b.provider_email }})</p>
+                            <p><small>📅 Booked on {{ b.booking_time.strftime('%Y-%m-%d %H:%M') }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center bg-dark text-white border border-light">
+            You have not booked any services yet.
+        </div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="/dashboard" class="btn btn-outline-secondary btn-sm">← Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

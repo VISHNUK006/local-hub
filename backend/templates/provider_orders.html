@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Booking Orders - Provider{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="text-center text-success mb-4">📦 Booking Orders</h2>
+
+  {% if orders %}
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover theme-card table-striped">
+      <thead class="table-light text-dark">
+        <tr>
+          <th>Service</th>
+          <th>Booked By</th>
+          <th>Booking Time</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for o in orders %}
+        <tr>
+          <td>{{ o.service_title }}</td>
+          <td>{{ o.user_name }}<br><small>{{ o.user_email }}</small></td>
+          <td>{{ o.booking_time }}</td>
+          <td>
+            {% if o.status == 'Confirmed' %}
+              <span class="badge bg-success">Confirmed</span>
+            {% else %}
+              <span class="badge bg-warning text-dark">Pending</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if o.status != 'Confirmed' %}
+            <form method="POST">
+              <input type="hidden" name="booking_id" value="{{ o.id }}">
+              <button type="submit" class="btn btn-sm btn-success">Confirm</button>
+            </form>
+            {% else %}
+              <span class="text-muted">No Action Needed</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="alert alert-info text-center">No booking orders yet.</div>
+  {% endif %}
+
+  <div class="text-center mt-4">
+    <a href="/dashboard" class="btn btn-outline-secondary btn-sm">← Back to Dashboard</a>
+  </div>
+</div>
+{% endblock %}

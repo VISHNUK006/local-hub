@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Provider Dashboard - Local Hub{% endblock %}
+
+{% block content %}
+<div class="text-center mb-4">
+    <h2 class="text-success">⚙️ Provider Dashboard</h2>
+    <p class="lead">Welcome, <strong>{{ session['user']['name'] }}</strong></p>
+    <p>Role: <strong>{{ session['user']['role'] }}</strong></p>
+</div>
+
+<hr>
+
+<div class="row justify-content-center">
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">📝 Your Profile</h5>
+                <p class="card-text">View and Edit your Profile</p>
+                <a href="{{ url_for('profile') }}" class="btn btn-outline-primary">Go to Profile</a>
+            </div>
+        </div>
+    </div>   
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">➕ Add New Service</h5>
+                <p class="card-text">you can add service</p>
+                <a href="{{ url_for('add_service') }}" class="btn btn-outline-primary">Add new Service</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">🧾 My Services</h5>
+                <p class="card-text">View and Edit your services</p>
+                <a href="{{ url_for('my_services') }}" class="btn btn-outline-primary">Go to Services</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">📦 Booking Orders</h5>
+                <p class="card-text">View your Orders</p>
+                <a href="/provider-orders" class="btn btn-outline-primary">Go to Orders</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">📥 Inbox</h5>
+                <p class="card-text">View messages from users</p>
+                <a href="{{ url_for('inbox') }}" class="btn btn-outline-primary">Go to Inbox</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">👨‍🔧 View Service Providers</h5>
+                <p class="card-text">View all Providers</p>
+                <a href="/providers" class="btn btn-outline-primary">Go to Providers</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+   <a href="{{ url_for('home') }}" class="btn btn-outline-danger">🏠 Home</a>
+</div>
+{% endblock %}

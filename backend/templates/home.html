@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Local Hub{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+  <h1>Find Trusted Local Services</h1>
+  <p class="lead">Book electricians, plumbers, tutors, and more near you!</p>
+
+  <form action="/services" method="get" class="d-flex justify-content-center mt-4">
+    <input type="text" name="q" class="form-control w-50" placeholder="Search for services...">
+    <button type="submit" class="btn btn-success ms-2">Search</button>
+  </form>
+</div>
+
+<div class="container mt-5">
+  <h2 class="text-center">⭐ Listen to our Customer</h2>
+  <div class="row mt-4">
+    {% for t in testimonials %}
+    <div class="col-md-4">
+      <div class="card shadow p-3 mb-3">
+        <p>"{{ t.message }}"</p>
+        <strong>- {{ t.name }}</strong>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="text-success text-center mb-4">👤 Profile Summary</h2>
+  <div class="card theme-card mx-auto" style="max-width: 500px;">
+    <div class="card-body">
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Role:</strong> {{ user.role.title() }}</p>
+      <p><strong>Location:</strong> {{ user.location or 'Not specified' }}</p>
+
+      {% if user.role == 'provider' %}
+        <p><strong>Total Services Listed:</strong> {{ extra.service_count }}</p>
+      {% elif user.role == 'user' %}
+        <p><strong>Total Bookings:</strong> {{ extra.booking_count }}</p>
+      {% endif %}
+
+      <div class="text-center mt-4">
+        <a href="{{ url_for('edit_profile') }}" class="btn btn-primary btn-sm">✏️ Edit Profile</a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary btn-sm ms-2">← Back to Dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard - Local Hub{% endblock %}
+
+{% block content %}
+<div class="text-center mb-4">
+    <h2 class="text-success">⚙️ Admin Dashboard</h2>
+    <p class="lead">Welcome, <strong>{{ session['user']['name'] }}</strong></p>
+    <p>Role: <strong>{{ session['user']['role'] }}</strong></p>
+</div>
+
+<hr>
+
+<div class="row justify-content-center">
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">📝 Your Profile</h5>
+                <p class="card-text">View and Edit your Profile</p>
+                <a href="{{ url_for('profile') }}" class="btn btn-outline-primary">Go to Profile</a>
+            </div>
+        </div>
+    </div>   
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">👥 Manage Users</h5>
+                <p class="card-text">View and manage all registered users.</p>
+                <a href="{{ url_for('admin_users') }}" class="btn btn-outline-primary">Go to Users</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">🛠 Manage Services</h5>
+                <p class="card-text">View and manage all listed services.</p>
+                <a href="{{ url_for('admin_services') }}" class="btn btn-outline-primary">Go to Services</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">📨 Manage Messages</h5>
+                <p class="card-text">View contact messages from users.</p>
+                <a href="{{ url_for('admin_contacts') }}" class="btn btn-outline-primary">Go to Messages</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+                <h5 class="card-title text-warning">👨‍🔧 Service Providers</h5>
+                <p class="card-text">View all Providers</p>
+                <a href="/providers" class="btn btn-outline-primary">Go to Providers</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="{{ url_for('home') }}" class="btn btn-outline-danger">🏠 Home</a>
+</div>
+{% endblock %}

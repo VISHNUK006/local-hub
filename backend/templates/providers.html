@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Service Providers - Local Services Hub{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center text-success">🔧 All Registered Service Providers</h2>
+
+    <form class="row g-3 mb-4" method="GET">
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="q" placeholder="Search name or email"
+                   value="{{ query or '' }}">
+        </div>
+        {% if is_admin %}
+        <div class="col-md-4">
+            <select name="location" class="form-select">
+                <option value="">All Locations</option>
+                {% for loc in locations %}
+                    <option value="{{ loc }}" {% if selected_location == loc %}selected{% endif %}>
+                        {{ loc }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+        <div class="col-md-2">
+            <button class="btn btn-outline-success w-100">Search</button>
+        </div>
+        <div class="col-md-2">
+            <a href="/providers" class="btn btn-outline-danger w-100">Reset</a>
+        </div>
+    </form>
+
+    {% if is_admin %}
+        {% if grouped_providers %}
+            {% for location, providers in grouped_providers.items() %}
+                <div class="mb-4">
+                    <h5 class="text-primary">📍 {{ location }}</h5>
+                    <ul class="list-group">
+                        {% for p in providers %}
+                            <li class="list-group-item">
+                                <strong>{{ p.name }}</strong><br>
+                                <small class="text-muted">{{ p.email }}</small>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-warning text-center">No providers found.</div>
+        {% endif %}
+    {% else %}
+        {% if providers %}
+            <ul class="list-group">
+                {% for p in providers %}
+                    <li class="list-group-item">
+                        <strong>{{ p.name }}</strong><br>
+                        <small class="text-muted">{{ p.email }}</small><br>
+                        <span>📍 {{ p.location or 'N/A' }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="alert alert-warning text-center">No providers found for your location.</div>
+        {% endif %}
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="/dashboard" class="btn btn-outline-secondary btn-sm">← Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}
